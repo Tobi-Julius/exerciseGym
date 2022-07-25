@@ -7,6 +7,7 @@ import { Typography, Stack, Box, TextField, Button } from "@mui/material";
 
 const SearchExercises = () => {
   const [text, setText] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -20,7 +21,6 @@ const SearchExercises = () => {
   }, []);
 
   // const items = useSelector((state) => state); //IMPORTANT
-  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (text) {
@@ -102,7 +102,7 @@ const SearchExercises = () => {
           overflow: "scroll",
         }}
       >
-        <HorizontalScrollBar />
+        <HorizontalScrollBar isBodyPart />
       </Box>
     </Stack>
   );

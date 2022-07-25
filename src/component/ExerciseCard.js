@@ -6,7 +6,17 @@ const ExerciseCard = ({ item }) => {
   return (
     <Link className="exercise-card" to={`/exercise/${item.id}`}>
       <img src={item.gifUrl} alt={item.name} loading="lazy" />
-      <Stack direction="row">
+      <Stack
+        // sx={{
+        //   display: "flex",
+        //   width: "10vw",
+        //   maxWidth: "10vw",
+        //   flexDirection: "row",
+        //   overflow: "hidden",
+        //   gap: { lg: "110px", xs: "50px" },
+        // }}
+        direction="row"
+      >
         <Button
           sx={{
             ml: "21px",

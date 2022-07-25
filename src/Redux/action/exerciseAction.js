@@ -27,3 +27,10 @@ export const selectedExercise = (exercise) => {
     payload: exercise,
   };
 };
+
+export const youtubeVideos = (vids) => {
+  return {
+    type: actionTypes.YOUTUBE_VIDEOS,
+    payload: vids,
+  };
+};

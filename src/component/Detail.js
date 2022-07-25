@@ -1,42 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectedExercise } from "../Redux/action/exerciseAction";
-import { fetchData, exerciseOptions } from "../utils/fetchData";
+import React from "react";
 import bodyPartImage from "../assets/icons/body-part.png";
 import targetImage from "../assets/icons/target.png";
 import equipmentImage from "../assets/icons/equipment.png";
 import { Button, Stack, Typography } from "@mui/material";
 
-const Detail = ({ id }) => {
-  const dispatch = useDispatch();
-  const [dataDetail, setdataDetail] = useState("");
-
-  useEffect(() => {
-    const fetchingData = async () => {
-      const exerciseUrl = "https://exercisedb.p.rapidapi.com";
-
-      const data = await fetchData(
-        `${exerciseUrl}/exercises/exercise/${id}`,
-        exerciseOptions
-      );
-      dispatch(selectedExercise(data));
-      setdataDetail(data);
-    };
-    fetchingData();
-  }, [id]);
-
+const Detail = ({ data }) => {
   const extraDetail = [
     {
       icon: bodyPartImage,
-      name: dataDetail.bodyPart,
+      name: data.bodyPart,
     },
     {
       icon: targetImage,
-      name: dataDetail.target,
+      name: data.target,
     },
     {
       icon: equipmentImage,
-      name: dataDetail.equipment,
+      name: data.equipment,
     },
   ];
 
@@ -46,19 +26,19 @@ const Detail = ({ id }) => {
       sx={{ flexDirection: { lg: "row" }, p: "20px", alignItems: "center" }}
     >
       <img
-        src={dataDetail.gifUrl}
-        alt={dataDetail.name}
+        src={data.gifUrl}
+        alt={data.name}
         loading="lazy"
         className="detail-image"
       />
       <Stack sx={{ gap: { lg: "35px", xs: "20px" } }}>
         <Typography textTransform="capitalize" variant="h3">
-          {dataDetail.name}
+          {data.name}
         </Typography>
         <Typography variant="h6" textTransform="capitalize">
-          Exercise keep you strong, {dataDetail.name} is one of the best
-          exercises to target your{dataDetail.target}. it will help you improve
-          your mood and gain energy
+          Exercise keep you strong, {data.name} is one of the best exercises to
+          target your{data.target}. it will help you improve your mood and gain
+          energy
         </Typography>
         {extraDetail.map((item) => (
           <Stack
@@ -78,7 +58,7 @@ const Detail = ({ id }) => {
             >
               <img
                 src={item.icon}
-                alt={dataDetail.name}
+                alt={data.name}
                 style={{ width: "50px", height: "50px" }}
               />
             </Button>

@@ -4,6 +4,7 @@ const initialState = {
   exercises: [],
   bodyPart: [],
   bodyText: "all",
+  videos: []
 };
 
 export const exerciseReducer = (state = initialState, { type, payload }) => {
@@ -16,6 +17,9 @@ export const exerciseReducer = (state = initialState, { type, payload }) => {
 
     case actionTypes.SELECTED_PART:
       return { ...state, bodyText: payload };
+
+    case actionTypes.YOUTUBE_VIDEOS:
+      return { ...state, videos: payload };
 
     default:
       return state;

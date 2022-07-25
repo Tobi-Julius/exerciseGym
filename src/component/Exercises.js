@@ -1,9 +1,8 @@
-import { Pagination, Stack, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import { Pagination, Stack, Typography, Box } from "@mui/material";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setExercise } from "../Redux/action/exerciseAction.js";
 import ExerciseCard from "../component/ExerciseCard.js";
-import { fetchData, exerciseOptions } from "../utils/fetchData.js";
+import Loader from "./Loader.js";
 
 const Exercises = () => {
   const dispatch = useDispatch();
@@ -20,14 +19,13 @@ const Exercises = () => {
   const currentExercise =
     exerciseList &&
     exerciseList.slice(indexOfFirstExercise, indexOfLastExercise);
-  console.log(exerciseList);
   const paginate = (e, value) => {
     setCurrentPage(value);
     window.scrollTo({ top: 1000, behavior: "smooth" });
   };
 
   return (
-    <div id="exercises" sx={{ mt: { lg: "110px" }, mt: "50px", p: "20px" }}>
+    <Box id="exercises" sx={{ mt: { lg: "110px" }, mt: "50px", p: "20px" }}>
       <Typography variant="h3" mt="46px" mb="30px">
         Showing Result
       </Typography>
@@ -39,12 +37,13 @@ const Exercises = () => {
           flexDirection: "row",
           flexWrap: "wrap",
           justifyContent: "center",
+          overflow: "hidden",
           gap: { lg: "110px", xs: "50px" },
         }}
       >
-        {currentExercise.map((item, index) => (
-          <ExerciseCard key={index} item={item} />
-        ))}
+        {currentExercise.map((item, index) =>
+          item ? <ExerciseCard key={index} item={item} /> : <Loader />
+        )}
       </Stack>
       <Stack mt="100px" alignItems="center">
         {exerciseList.length > 9 && (
@@ -59,7 +58,7 @@ const Exercises = () => {
           />
         )}
       </Stack>
-    </div>
+    </Box>
   );
 };
 

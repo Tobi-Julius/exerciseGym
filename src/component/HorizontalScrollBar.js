@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import BodyPart from "./BodyPart";
-// import { Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
+import Loader from "./Loader";
+import ExerciseCard from "./ExerciseCard";
 // import LeftArrowIcon from "../assets/icons/left-arrow.png";
 // import RightArrowIcon from "../assets/icons/right-arrow.png";
 
-const HorizontalScrollBar = () => {
+const HorizontalScrollBar = ({ isBodyPart, data }) => {
   const items = useSelector((state) => state);
 
   // const LeftArrow = () => {
@@ -32,12 +33,34 @@ const HorizontalScrollBar = () => {
   // LeftArrow={LeftArrow} RightArrow={RightArrow}
 
   return (
-    <ScrollMenu>
-      {items.allExercise.bodyPart.map((item, index) => (
-        <Box key={item.id} m="0 40px">
-          <BodyPart key={item.id} item={item} />
+    <ScrollMenu direction="row">
+      {isBodyPart ? (
+        <ScrollMenu>
+          {items.allExercise.bodyPart.map((item, index) => (
+            <Box key={index} m="0 40px">
+              <BodyPart key={item.id} item={item} />
+            </Box>
+          ))}
+        </ScrollMenu>
+      ) : (
+        <Box
+          sx={{
+            width: "100vw",
+          }}
+        >
+          <ScrollMenu direction="row">
+            {data.map((item, index) =>
+              item ? (
+                <Box key={index} m="4px 40px" width="30%">
+                  <ExerciseCard key={item.id} item={item} />
+                </Box>
+              ) : (
+                <Loader />
+              )
+            )}
+          </ScrollMenu>
         </Box>
-      ))}
+      )}
     </ScrollMenu>
   );
 };
