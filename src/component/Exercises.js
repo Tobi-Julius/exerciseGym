@@ -1,12 +1,10 @@
 import { Pagination, Stack, Typography, Box } from "@mui/material";
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ExerciseCard from "../component/ExerciseCard.js";
 import Loader from "./Loader.js";
 
 const Exercises = () => {
-  const dispatch = useDispatch();
-
   const exerciseList = useSelector((state) => state.allExercise.exercises);
 
   const [currentPage, setCurrentPage] = useState(1);

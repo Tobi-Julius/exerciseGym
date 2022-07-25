@@ -52,7 +52,7 @@ const HorizontalScrollBar = ({ isBodyPart, data }) => {
             {data.map((item, index) =>
               item ? (
                 <Box key={index} m="4px 40px" width="30%">
-                  <ExerciseCard key={item.id} item={item} />
+                  <ExerciseCard isBodyPart key={item.id} item={item} />
                 </Box>
               ) : (
                 <Loader />
